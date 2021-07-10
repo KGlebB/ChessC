@@ -21,7 +21,7 @@ public:
 private:
 	std::shared_ptr<ChessBoard> mpBoard;
 	Color mTurn;
-	std::shared_ptr<Player> mpPlayerWhite = std::make_shared<Player>();
-	std::shared_ptr<Player> mpPlayerBlack = std::make_shared<Player>();
+	std::shared_ptr<Player> mpPlayerWhite;
+	std::shared_ptr<Player> mpPlayerBlack;
 };
 

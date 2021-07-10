@@ -19,13 +19,9 @@ std::istream& operator>>(std::istream& is, Location& location)
 bool operator==(const Location& left, const Location& right)
 {
 	if (left.row == right.row && left.column == right.column)
-	{
 		return true;
-	}
 	else
-	{
 		return false;
-	}
 }
 
 Location operator*(const int multiplier, const Location& coordinates)
@@ -94,24 +90,19 @@ inline void ChessPiece::setColor(Color color)
 ChessPiece::ProcessMoveResult ChessPiece::ProcessOneMove(const ChessBoard& board, const Location& offset)
 {
 	Location moveLocation{ getLocation() + offset };
-	if (moveLocation.column < 0 || moveLocation.column > cMaxCoordinate ||
-		moveLocation.row < 0 || moveLocation.row > cMaxCoordinate)
-	{
+
+	if (moveLocation.column < 0 || moveLocation.column > cMaxCoordinate || moveLocation.row < 0 || moveLocation.row > cMaxCoordinate)
 		return ProcessMoveResult::OutOfBoard;
-	}
+
 	auto pPiece{ board.getPieceAt(moveLocation) };
+
 	if (pPiece == nullptr)
-	{
 		return ProcessMoveResult::FreeSpace;
-	}
+
 	if (isColor(pPiece->getColor()))
-	{
 		return ProcessMoveResult::FriendlyPiece;
-	}
 	else
-	{
 		return ProcessMoveResult::HostilePiece;
-	}
 }
 
 void ChessPiece::resetAvailableMoves()
@@ -163,6 +154,7 @@ bool ChessPiece::isCheckSafely(const ChessBoard& board, const Location& newLocat
 	std::shared_ptr<ChessBoard> pNewBoard = std::make_shared<ChessBoard>(board);
 	pNewBoard->getPieceAt(getLocation())->Move(newLocation, pNewBoard);
 	CheckMoves(*pNewBoard);
+
 	if (pNewBoard->isKingInCheck(getColor()))
 		return false;
 	else

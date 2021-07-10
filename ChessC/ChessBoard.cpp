@@ -47,10 +47,6 @@ ChessBoard::ChessBoard(const ChessBoard& other)
 
 void ChessBoard::Reset()
 {
-	for (auto y : mapBoard)
-		for (auto x : y)
-			x.reset();
-
 	SettleChessPieces(Color::White);
 	SettleChessPieces(Color::Black);
 }

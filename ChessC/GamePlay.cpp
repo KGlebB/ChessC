@@ -4,15 +4,15 @@ GamePlay::GamePlay()
 {
 	mpBoard = std::make_shared<ChessBoard>();
 	mTurn = Color::White;
-	mpPlayerWhite->setColor(Color::White);
-	mpPlayerBlack->setColor(Color::Black);
+	mpPlayerWhite = std::make_shared<Player>(Color::White);
+	mpPlayerBlack = std::make_shared<Player>(Color::Black);
 }
 
 void GamePlay::ResetBoard() {
 	mpBoard->Reset();
 	mTurn = Color::White;
 }
-
+	
 void GamePlay::SwitchTurn()
 {
 	if (mTurn == Color::White)
