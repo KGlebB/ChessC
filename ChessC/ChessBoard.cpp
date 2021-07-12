@@ -83,30 +83,7 @@ void ChessBoard::MovePiece(const Location& from, const Location& to)
 		mapBoard[to.row][to.column] &&
 		mapBoard[to.row][to.column]->getType() == ChessPiece::Type::Rook)
 	{
-		auto pRookPiece = std::make_shared<ChessPieceRook>(getPieceAt(to)->getColor(), to);
-		mapBoard[to.row][to.column] = mapBoard[from.row][from.column];
-		mapBoard[to.row][to.column]->setLocation(to);
-		mapBoard[from.row][from.column] = nullptr;
-		if (pRookPiece->getLocation() == Location{ 0, 0 })
-		{
-			mapBoard[0][3] = pRookPiece;
-			mapBoard[0][3]->setLocation(Location{ 0, 3 });
-		}
-		else if (pRookPiece->getLocation() == Location{ 0, 7 })
-		{
-			mapBoard[0][5] = pRookPiece;
-			mapBoard[0][5]->setLocation(Location{ 0, 5 });
-		}
-		else if (pRookPiece->getLocation() == Location{ 7, 0 })
-		{
-			mapBoard[7][3] = pRookPiece;
-			mapBoard[7][3]->setLocation(Location{ 7, 3 });
-		}
-		else if (pRookPiece->getLocation() == Location{ 7, 7 })
-		{
-			mapBoard[7][5] = pRookPiece;
-			mapBoard[7][5]->setLocation(Location{ 7, 5 });
-		}
+		MovePieceCastle(from, to);
 	}
 	else
 	{
@@ -115,6 +92,34 @@ void ChessBoard::MovePiece(const Location& from, const Location& to)
 		mapBoard[to.row][to.column]->setLocation(to);
 		if (mapBoard[to.row][to.column]->canPromote())
 			PromotePawn(to);
+	}
+}
+
+void ChessBoard::MovePieceCastle(const Location& from, const Location& to)
+{
+	auto pRookPiece = std::make_shared<ChessPieceRook>(getPieceAt(to)->getColor(), to);
+	mapBoard[to.row][to.column] = mapBoard[from.row][from.column];
+	mapBoard[to.row][to.column]->setLocation(to);
+	mapBoard[from.row][from.column] = nullptr;
+	if (pRookPiece->getLocation() == Location{ 0, 0 })
+	{
+		mapBoard[0][3] = pRookPiece;
+		mapBoard[0][3]->setLocation(Location{ 0, 3 });
+	}
+	else if (pRookPiece->getLocation() == Location{ 0, 7 })
+	{
+		mapBoard[0][5] = pRookPiece;
+		mapBoard[0][5]->setLocation(Location{ 0, 5 });
+	}
+	else if (pRookPiece->getLocation() == Location{ 7, 0 })
+	{
+		mapBoard[7][3] = pRookPiece;
+		mapBoard[7][3]->setLocation(Location{ 7, 3 });
+	}
+	else if (pRookPiece->getLocation() == Location{ 7, 7 })
+	{
+		mapBoard[7][5] = pRookPiece;
+		mapBoard[7][5]->setLocation(Location{ 7, 5 });
 	}
 }
 

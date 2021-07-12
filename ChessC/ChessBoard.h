@@ -8,19 +8,6 @@ class ChessPiece;
 
 const int cBoardSize{ 8 };
 
-enum class GameStage
-{
-	Normal,
-	Tie,
-	Check,
-	Checkmate
-};
-
-struct PairGameStage
-{
-	GameStage white, black;
-};
-
 class ChessBoard
 {
 public:
@@ -30,6 +17,7 @@ public:
 	void Reset();
 	void SettleChessPieces(const Color& color);
 	void MovePiece(const Location& from, const Location& to);
+	void MovePieceCastle(const Location& from, const Location& to);
 	void PromotePawn(const Location& pawnLocation);
 
 	std::shared_ptr<ChessPiece> getPieceAt(const Location& location) const;
